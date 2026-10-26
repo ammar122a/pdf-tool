@@ -1,16 +1,16 @@
 from pathlib import Path
-from pdf_service import merge_pdfs
+from pdf_service import mergePdfs
 
 def main():
-    project_dir = Path(__file__).resolve().parent
+    location = Path(__file__).resolve().parent
 
-    input_paths = [
-        project_dir / "samples" / "dokument1.pdf",
-        project_dir / "samples" / "dokument2.pdf",
-    ]
-    output_path = project_dir / "merged.pdf"
+    inputPaths = []
+    for path in Path(location / "samples").glob("*.pdf"):
+        inputPaths.append(path)
 
-    result = merge_pdfs(input_paths, output_path)
+    outputPath = location / "merged.pdf"
+
+    result = mergePdfs(inputPaths, outputPath)
     print(f"PDF gespeichert: {result}")
 
 if __name__ == "__main__":

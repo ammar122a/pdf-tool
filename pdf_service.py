@@ -3,25 +3,24 @@ from pypdf import PdfWriter
 
 
 
-def merge_pdfs(input_paths: list[Path], output_path: Path) -> Path:
-    """Merge PDFs in the given order and return the output path."""
+def mergePdfs(inputPaths: list[Path], outputPath: Path) -> Path:
 
-    if len(input_paths) < 2:
+    if len(inputPaths) < 2:
         raise ValueError("You need at least two PDFs to merge.")
-    for path in input_paths:
+    for path in inputPaths:
         if not path.is_file():
             raise FileNotFoundError(f"Input file not found: {path}")
-    if output_path.exists():
-        raise FileExistsError(f"Output file already exists: {output_path}")
+    if outputPath.exists():
+        raise FileExistsError(f"Output file already exists: {outputPath}")
 
     writer = PdfWriter()
 
     try:
-        for path in input_paths:
+        for path in inputPaths:
             writer.append(str(path))
 
-        writer.write(str(output_path))
+        writer.write(str(outputPath))
     finally:
         writer.close()
 
-    return output_path
+    return outputPath
